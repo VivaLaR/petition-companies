@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script>
+    var url_advertiser_base = "{{ url_for('index', _external=True) + '/advertiser/' }}";
+  </script>
+  <script src="{{ url_for('static', filename='advertisers.js') }}"></script>
+</head>
+<body>
+<table class="table table-striped" id="sheets-table">
+  <thead>
+  <tr>
+    <th class="xs-small-11">Advertiser</th>
+    <th class="xs-small-1">
+      <button type="button" id="create-button" class="btn btn-primary" aria-label="Create">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for advertiser in advertisers %}
+    {% include 'advertiser_row.html' %}
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>

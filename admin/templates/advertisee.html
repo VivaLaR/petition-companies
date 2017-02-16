@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin advertisee</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="{{ url_for('static', filename='advertisee.js') }}"></script>
+  <script>
+    var url_index = "{{ url_for('index', _external=True) }}";
+    var url_advertisee = "{{ url_for('advertisee', _external=True, advertisee_id=advertisee.key.id() if advertisee.key else None) }}";
+    var url_delete_advertiser = "{{ url_for('manage_advertisee_advertiser', _external=True) }}";
+    var advertisee_key = "{{ advertisee.key.id() if advertisee.key else None}}";
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <div class="col-xs-9"></div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-primary" id="save-advertisee">Save</button>
+  </div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-default" id="close-advertisee">Close</button>
+  </div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-danger" id="delete-advertisee">Delete</button>
+  </div>
+</div>
+
+<table class="table table-striped" id="advertisee-table">
+  <thead>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td class="col-xs-1">Name</td>
+    <td class="col-xs-11" id="advertisee-name" style="white-space: pre-wrap" contenteditable="true">{{ advertisee.name }}</td>
+  </tr>
+  <tr>
+    <td class="col-xs-1">Description</td>
+    <td class="col-xs-11" id="advertisee-description" style="white-space: pre-wrap" contenteditable="true">{{ advertisee.description }}</td>
+  </tr>
+  <tr>
+    <td class="col-xs-1">Email</td>
+    <td class="col-xs-11" id="advertisee-email" style="white-space: pre-wrap; padding: 0" contenteditable="true">{{ advertisee.email }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped" id="advertisee-table">
+  <thead>
+  <tr>
+    <th class="col-xs-12">Advertiser</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for advertiser in advertisers %}
+    {% include 'advertisee_advertiser_row.html' %}
+  {% endfor %}
+  <tr>
+    <td class="col-xs-11">
+      <select class="advertiser">
+        {% for advertiser in advertisers_not_associated %}
+          {% include 'advertiser_option.html' %}
+        {% endfor %}
+      </select>
+    </td>
+    <td class="col-xs-1">
+      <button type="button" id="add-advertiser" class="btn btn-primary" aria-label="Add">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

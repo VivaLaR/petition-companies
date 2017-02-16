@@ -1,0 +1,6 @@
+venv/
+*.pyc
+*.swp
+*client_secret.json
+lib/
+.idea/

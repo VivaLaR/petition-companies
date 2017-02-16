@@ -1,0 +1,11 @@
+#application: petition-companies
+#version: 1
+runtime: python27
+service: default
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: .*
+  script: main.app

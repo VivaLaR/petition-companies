@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin advertiser</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="{{ url_for('static', filename='advertiser.js') }}"></script>
+  <script>
+    var url_advertisers = "{{ url_for('advertisers', _external=True) }}";
+    var url_advertiser = "{{ url_for('advertiser', _external=True, advertiser_id=advertiser.key.id() if advertiser.key else None) }}";
+    var url_delete_poc = "{{ url_for('advertiser', _external=True, advertiser_id=advertiser.key.id() if advertiser.key else None) }}";
+    var advertiser_key = "{{ advertiser.key.id() if advertiser.key else None }}";
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <div class="col-xs-9"></div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-primary" id="save-advertiser">Save</button>
+  </div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-default" id="close-advertiser">Close</button>
+  </div>
+  <div class="col-xs-1">
+    <button type="button" class="btn btn-danger" id="delete-advertiser">Delete</button>
+  </div>
+</div>
+
+<h4 id="advertiser-name" style="white-space: pre-wrap" contenteditable="true" class="text-center">{{ advertiser.name }}</h4>
+
+<table class="table table-striped" id="advertiser-table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>
+      <button type="button" id="create-poc" class="btn btn-primary" aria-label="Create">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for poc_key in advertiser.pocs %}
+    {% set poc = poc_key.get() %}
+    {% include 'advertiser_poc.html' %}
+  {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
+

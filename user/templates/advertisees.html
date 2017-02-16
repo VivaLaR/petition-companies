@@ -1,0 +1,8 @@
+<h4 class="text-center">Select companies to email</h4>
+<ul id="advertisee-list">
+  {% for advertisee in advertisees %}
+    <li id="{{ advertisee.key.id() }}">
+    {% include 'advertisee.html' %}
+    </li>
+  {% endfor %}
+</ul>

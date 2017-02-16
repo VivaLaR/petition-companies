@@ -1,0 +1,52 @@
+<a class="btn" role="button" data-toggle="collapse" href="#collapse-{{ advertisee.name }}">
+  +
+</a>
+{% set checked_list = checked[advertisee.key.id()] %}
+<input type="checkbox" {{ "checked" if (checked_list or not checked) else None }}>
+<a data-toggle="modal" href="#modal-advertisee-description">{{ advertisee.name }}</a>
+(<a data-toggle="modal" href="#modal-advertisee-email">Edit email</a>)
+
+<div class="collapse" id="collapse-{{ advertisee.name }}">
+  <ul id="advertiser-list">
+    {% for advertiser_key in advertisee.advertisers %}
+      <li id="{{ advertiser_key.id() }}">
+        <input type="checkbox" {{ "checked" if (advertiser_key.id() in checked_list) or not checked else None }}> {{ advertiser_key.get().name }}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Modal for advertisee descriptions -->
+<div class="modal fade" id="modal-advertisee-description" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ advertisee.name }}</h4>
+      </div>
+      <div class="modal-body">
+        {{ advertisee.description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for advertisee emails -->
+<div class="modal fade" id="modal-advertisee-email" tabindex="-1" role="dialog" eid="{{ advertisee.key.id() }}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ advertisee.name }}</h4>
+      </div>
+      <div class="modal-body">
+        <div style="white-space: pre-wrap" contenteditable="true">{{ advertisee.email }}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary email-modal" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

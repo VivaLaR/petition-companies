@@ -1,0 +1,6 @@
+dispatch:
+  - url: "admin*"
+    module: adminconsole
+
+  - url: "*"
+    module: default

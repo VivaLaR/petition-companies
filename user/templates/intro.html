@@ -1,0 +1,63 @@
+<row>
+  <div class="row">
+    <div class="col-xs-12">
+      <H2 class="text-center">Welcome</H2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      Companies we patronize are unintentionally advertising on hateful websites. Their financial contributions afford those websites the opportunity to spread their bigotry. We can stop this.
+      <br><br>
+      Select the companies you want to contact from the list below and then click the email button to petition these companies to stop advertising on malicious forums. You will be prompted to authorize the sending of these emails from a gmail account.
+      <br><br>
+      <a data-toggle="modal" href="#modal-email-explanation">How do I edit the emails before sending them?</a>
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-primary" type="submit" id="email-button">Email</button>
+    </div>
+  </div>
+</row>
+
+<!-- Modal for advertisee descriptions -->
+<div class="modal fade" id="modal-email-explanation" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Email templating</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            You can edit the emails that are sent by clicking the <a>Edit email</a> link next to the websites below.
+            <br><br>
+            The phrase {REP} will be replaced by the name of the advertising company's representative (e.g. Sam) and the phrase {COMPANY} will be replaced by the name of the advertising company (e.g. MegaCorp).
+            <br><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 email-text">
+            <div>
+              Hi {REP},
+
+              I am writing to let you know that {COMPANY} is advertising on Breitbart. Please change your settings in your ad network to stop supporting this bigoted website.
+
+              Thanks!
+            </div>
+          </div>
+          <div class="col-xs-6 email-text">
+            <div>
+              Hi Sam,
+
+              I am writing to let you know that MegaCorp is advertising on Breitbart. Please change your settings in your ad network to stop supporting this bigoted website.
+
+              Thanks!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
