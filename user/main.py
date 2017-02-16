@@ -44,28 +44,23 @@ def login():
 def email():
 
     if flask.request.method == 'POST':
-        eid_rids_dict = flask.request.get_json()
-        email_txts_dict = eid_rids_dict.pop('emails', {})
-        if 'credentials' not in flask.session:
-            flask.session[KEY_EMAIL_DICT] = eid_rids_dict
-            flask.session[KEY_EMAIL_TXTS_DICT] = email_txts_dict
-            return '', 401
-        else:
-            http = _get_auth_http()
-            emails.send_messages(eid_rids_dict, http, email_txts_dict)
-            return '', 204
-    else:
+        eid_rids_dict = flask.request.form
+        email_txts_dict = {k[6:]: eid_rids_dict.pop(k) for k in tuple(eid_rids_dict) if k[:6] == 'email_'}
+        eid_rids_dict = {k: v.split(',') for k, v in eid_rids_dict.items()}
+
         if 'credentials' not in flask.session:
             flask.session[KEY_OAUTH_ORIG_FUNC] = email.__name__
+            flask.session[KEY_EMAIL_DICT] = eid_rids_dict
+            flask.session[KEY_EMAIL_TXTS_DICT] = email_txts_dict
             return flask.redirect(flask.url_for('oauth2callback'))
-        else:
-            eid_rids_dict = flask.session[KEY_EMAIL_DICT]
-            email_txts_dict = flask.session[KEY_EMAIL_TXTS_DICT]
+    else:
+        eid_rids_dict = flask.session[KEY_EMAIL_DICT]
+        email_txts_dict = flask.session[KEY_EMAIL_TXTS_DICT]
 
-            http = _get_auth_http()
-            emails.send_messages(eid_rids_dict, http, email_txts_dict)
+    http = _get_auth_http()
+    emails.send_messages(eid_rids_dict, http, email_txts_dict)
 
-            return flask.redirect(flask.url_for('index'))
+    return flask.redirect(flask.url_for('index'))
 
 
 def _get_auth_http():

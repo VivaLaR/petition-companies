@@ -29,25 +29,32 @@ function emailOnClick() {
 
 function postDataToEmail(data) {
 
-  data['emails'] = email_txts;
+  var f = document.createElement("form");
+  f.setAttribute('method', "post");
+  f.setAttribute('action', url_email);
+  f.setAttribute('hidden', 'true');
 
-  $.ajax({
-    type: 'POST',
-    url: url_email,
-    data: JSON.stringify(data),
-    contentType: "application/json",
-    dataType: 'json',
-    success: function(data, status, xhr){
-      console.log('Success');
-    },
-    error: function(xhr, status, error){
-      if (xhr['status'] == 401) {
-        window.location.replace(url_email);
-      } else {
-        console.log('Failure');
-      }
-    },
-  });
+  var input;
+
+  for (var eid in email_txts) {
+    input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'email_' + eid;
+    input.value = email_txts[eid];
+    f.appendChild(input);
+  }
+
+  for (var k in data) {
+    input = document.createElement('input');
+    input.type = 'text';
+    input.name = k;
+    input.value = data[k];
+    f.appendChild(input);
+  }
+
+  $("body").append(f);
+
+  f.submit();
 }
 
 function wireSaveEmailButtons() {
