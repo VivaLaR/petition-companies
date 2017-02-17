@@ -58,9 +58,17 @@ def email():
         email_txts_dict = flask.session[KEY_EMAIL_TXTS_DICT]
 
     http = _get_auth_http()
-    emails.send_messages(eid_rids_dict, http, email_txts_dict)
+    num_sent = emails.send_messages(eid_rids_dict, http, email_txts_dict)
 
-    return flask.redirect(flask.url_for('index'))
+    return flask.redirect(flask.url_for('sent', num_emails_sent=num_sent))
+
+
+@app.route('/sent', methods=['GET', 'POST'])
+def sent():
+
+    num_emails_sent = flask.request.args.get('num_emails_sent', '')
+
+    return flask.render_template('sent.html', num_emails_sent=num_emails_sent)
 
 
 def _get_auth_http():

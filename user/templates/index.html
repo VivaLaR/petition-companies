@@ -2,17 +2,16 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>Defund Bigoted Websites</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
   <script src="{{ url_for('static', filename='index.js') }}"></script>
   <script>
     var url_email = "{{ url_for('email', _external=True) }}";
     var url_login = "{{ url_for('login', _external=True) }}";
   </script>
-  {% include google_analytics.html %}
+  {% include 'google_analytics.html' %}
 </head>
 <body>
 

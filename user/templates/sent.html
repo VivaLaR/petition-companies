@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+  <script>
+    var url_index = "{{ url_for('index', _external=True) }}";
+  </script>
+  {% include 'google_analytics.html' %}
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <a href={{ url_for('index', _external=True) }}>< Home</a>
+  </div>
+  <div class="row">
+    <h2 class="text-center">You did it!</h2>
+  </div>
+  <br>
+  <div class="row">
+    Congratulations you let {{ num_emails_sent }} companies know that they are advertising on websites that spread deceit, bigotry, and hate.
+    <br><br>
+    You can have even more impact by sharing this website with friends and on social media!
+    <br><br>
+    {#  Comes from https://dev.twitter.com/web/tweet-button#}
+    <a href="https://twitter.com/intent/tweet" data-text="Stop companies from advertising on bigoted websites like Breitbart!" data-url="https://petition-companies.appspot.com/" data-size="large" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {#  Comes from https://developers.facebook.com/docs/plugins/share-button#configurator#}
+    <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fpetition-companies.appspot.com%2F&layout=button&size=large&mobile_iframe=true&appId=1669161420037300&width=73&height=28" width="73" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  </div>
+</div>
+</body>
+</html>

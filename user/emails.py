@@ -24,6 +24,8 @@ def send_messages(advertisee_advertiser_dict, http, emails_dict):
     for m in messages:
         send_email(m, http)
 
+    return len(messages)
+
 
 def get_message(advertisee, advertiser, msg=None):
 
